@@ -1,0 +1,40 @@
+============================================================
+VALIDATION (sa, eval seed 7777, 1000 episodes)
+============================================================
+Job ID:   2539971.hn1
+Node:     cn267   cores: 20
+Models:   sa_2521687:af5=sa_2521687+action_frequency=5:off3=sa_2521687+route_lateral_offset_nm=3
+Started:  Thu Oct 29 10:26:51 IST 2026
+============================================================
+validating 3 SA models x 1000 episodes, eval seed 7777, 19 workers
+  sa_2521687         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2521687/ppo_sa.zip
+  af5                /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2521687/ppo_sa.zip  overrides {'action_frequency': 5}
+  off3               /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2521687/ppo_sa.zip  overrides {'route_lateral_offset_nm': 3}
+
+  5/57 shards, 262 s
+  10/57 shards, 266 s
+  15/57 shards, 275 s
+  20/57 shards, 555 s
+  25/57 shards, 567 s
+  30/57 shards, 580 s
+  35/57 shards, 586 s
+  40/57 shards, 779 s
+  45/57 shards, 791 s
+  50/57 shards, 799 s
+  55/57 shards, 816 s
+  57/57 shards, 825 s
+done in 825 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_sa_2539971/val.json
+
+1000 episodes, identical across models (sa, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+sa_2521687           15.88  13.76   2.12  0.00  1152.9  1.000   75.7    0                  0.644
+af5                  16.02  13.88   2.14  0.00  1150.9  1.000   76.5    0  +0.13 +- 0.37   0.343
+off3                 18.02  15.00   2.04  0.99  1184.7  1.000   75.9    0  +2.14 +- 1.23   0.012
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Thu Oct 29 10:40:43 IST 2026

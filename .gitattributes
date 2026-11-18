@@ -1,0 +1,9 @@
+# Keep LF in the working tree on every OS: the cluster runs these files with
+# bash and Python, and a CRLF shebang ("/bin/bash^M") kills the job at start.
+* text=auto eol=lf
+*.zip binary
+*.gif binary
+*.png binary
+*.pdf binary
+*.npz binary
+*.pkl binary

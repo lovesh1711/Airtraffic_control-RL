@@ -1,0 +1,99 @@
+============================================================
+VALIDATION (sa, eval seed 7777, 1000 episodes)
+============================================================
+Job ID:   2530495.hn1
+Node:     cn011   cores: 20
+Models:   sa_2521687:sa_2527464:sa_2527465
+Started:  Wed Oct 28 08:18:27 IST 2026
+============================================================
+validating 3 SA models x 1000 episodes, eval seed 7777, 19 workers
+  sa_2521687         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2521687/ppo_sa.zip
+  sa_2527464         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2527464/ppo_sa.zip
+  sa_2527465         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2527465/ppo_sa.zip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5/57 shards, 509 s
+  10/57 shards, 515 s
+  15/57 shards, 522 s
+  20/57 shards, 715 s
+  25/57 shards, 729 s
+  30/57 shards, 736 s
+  35/57 shards, 749 s
+  40/57 shards, 933 s
+  45/57 shards, 950 s
+  50/57 shards, 958 s
+  55/57 shards, 965 s
+  57/57 shards, 984 s
+done in 985 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_sa_2530495/val.json
+
+1000 episodes, identical across models (sa, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+sa_2527464           15.29  12.92   2.33  0.03  1175.4  0.999   75.7    1                  0.823
+sa_2521687           15.88  13.76   2.12  0.00  1152.9  1.000   75.7    0  +0.59 +- 0.60   0.146
+sa_2527465           16.22  13.41   2.73  0.08  1150.9  0.999   76.6    1  +0.93 +- 0.57   0.031
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Wed Oct 28 08:35:12 IST 2026

@@ -1,0 +1,50 @@
+============================================================
+OFFICIAL 1000-EPISODE PROTOCOL (seed 42)
+============================================================
+Job ID:    2084515.hn1
+Node:      cn197
+SA model:  neutral
+MA model:  neutral
+Videos:    0  (seeds: 1 2 3 4 5)
+Started:   Sat Aug 29 13:00:48 IST 2026
+============================================================
+
+=================== SINGLE-AGENT (official) ===================
+### Single-agent — mean over 1000 episodes (seed 42)
+| Metric | Mean | Std |
+| --- | ---: | ---: |
+| Goal completion rate [%] | 100.000 | 0.000 |
+| Flight time [s] | 851.906 | 134.969 |
+| Intrusion events | 1.120 | 1.126 |
+| Intrusion time [s] | 96.016 | 146.079 |
+| Restricted-area events | 0.814 | 0.886 |
+| Restricted-area time [s] | 130.004 | 163.263 |
+| Sector-exit events | 0.000 | 0.000 |
+| Time outside sector [s] | 0.000 | 0.000 |
+_total_reward (own reward, not comparable across teams): -301.080 ± 223.195_
+
+=================== MULTI-AGENT (official) ====================
+### Multi-agent — mean over 10000 agent-episodes (seed 42)
+| Metric | Mean | Std |
+| --- | ---: | ---: |
+| Goal completion rate [%] | 100.000 | 0.000 |
+| Flight time [s] | 847.594 | 132.085 |
+| Intrusion events | 0.877 | 0.939 |
+| Intrusion time [s] | 64.783 | 90.351 |
+| Restricted-area events | 0.799 | 0.913 |
+| Restricted-area time [s] | 121.665 | 160.484 |
+| Sector-exit events | 0.000 | 0.000 |
+| Time outside sector [s] | 0.000 | 0.000 |
+_total_reward (own reward, not comparable across teams): -245.328 ± 224.638_
+
+Artifacts in /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/official_2084515:
+total 150
+drwxr-xr-x 2 ae24d401 phd  33280 Aug 29 14:29 .
+drwxr-xr-x 6 ae24d401 phd  33280 Aug 29 13:37 ..
+-rw-r--r-- 1 ae24d401 phd 530662 Aug 29 14:29 official_ma.csv
+-rw-r--r-- 1 ae24d401 phd   1502 Aug 29 14:29 official_ma.txt
+-rw-r--r-- 1 ae24d401 phd  52490 Aug 29 13:30 official_sa.csv
+-rw-r--r-- 1 ae24d401 phd   1497 Aug 29 13:30 official_sa.txt
+-rw-r--r-- 1 ae24d401 phd   1640 Aug 29 14:29 summary.txt
+
+Finished: Sat Aug 29 14:29:31 IST 2026

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+cluster-ignore/
+.vscode/
+
+# training artefacts; the submitted models are in submission/
+results/**/*.zip
+results/**/ppo_*_ck/
+*.pkl

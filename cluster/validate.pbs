@@ -1,0 +1,51 @@
+#!/bin/bash
+# Rank models on the validation stream (seed 7777). Submit from the repository root:
+#   qsub -v KIND=sa,MODELS=submission/sa/ppo_sa.zip:sa_2527464 cluster/validate.pbs
+#   qsub -v "KIND=ma,MODELS=ma_2531101:off3=ma_2531101+route_lateral_offset_nm=3" cluster/validate.pbs
+# MODELS is colon-separated; each entry is a run id under results/, a path,
+# "@M" for the checkpoint nearest M million steps, "+key=value" overrides and
+# "label=" names (see solution/validate.py). Output: results/val_<kind>_<jobid>/
+#PBS -N atc-val
+#PBS -l walltime=05:00:00
+#PBS -l select=1:ncpus=40
+
+CONDA_ROOT=${CONDA_ROOT:-$HOME/miniconda3}
+CONDA_ENV=${CONDA_ENV:-atcrl}
+KIND=${KIND:?set KIND=sa or ma}
+MODELS=${MODELS:?set MODELS}
+EVAL_SEED=${EVAL_SEED:-7777}
+if [ "$KIND" = "sa" ]; then EPISODES=${EPISODES:-1000}; else EPISODES=${EPISODES:-300}; fi
+
+set -u
+JOB=$(echo "$PBS_JOBID" | cut -f1 -d.)
+OUT=$PBS_O_WORKDIR/results/val_${KIND}_$JOB
+mkdir -p "$OUT"
+WORK=$HOME/scratch/val_$JOB
+mkdir -p "$WORK"
+cp -R "$PBS_O_WORKDIR/bluesky-gym" "$WORK"/ || exit 1
+cd "$WORK/bluesky-gym" || exit 1
+
+PY=$CONDA_ROOT/envs/$CONDA_ENV/bin/python
+NCPUS=${NCPUS:-$(qstat -f "$PBS_JOBID" 2>/dev/null | awk -F' = ' '/Resource_List.ncpus/ {print $2; exit}')}
+NCPUS=${NCPUS:-$(nproc)}
+export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 SDL_VIDEODRIVER=dummy
+export PYTHONPATH=$WORK/bluesky-gym:${PYTHONPATH:-}
+export LD_LIBRARY_PATH=$CONDA_ROOT/envs/$CONDA_ENV/lib:${LD_LIBRARY_PATH:-}
+
+# paths are relative to the repository root, the job runs from a copy
+SPECS=""
+for m in $(echo "$MODELS" | tr ':' ' '); do
+    case "$m" in
+        /*|*=*) ;;
+        */*) m="$PBS_O_WORKDIR/$m" ;;
+    esac
+    SPECS="$SPECS $m"
+done
+
+# shellcheck disable=SC2086
+$PY -m solution.validate --kind "$KIND" --episodes "$EPISODES" --eval-seed "$EVAL_SEED" \
+    --workers $(( NCPUS - 1 )) --results "$PBS_O_WORKDIR/results" --out "$OUT/val.json" $SPECS 2>&1 \
+    | grep -v -E "RTree|Reading config|navigation database|Reading cache|Successfully loaded|BADA" \
+    | tee "$OUT/log.txt"
+sed -n '/episodes, identical across models/,$p' "$OUT/log.txt" > "$OUT/summary.txt"
+rm -rf "$WORK"

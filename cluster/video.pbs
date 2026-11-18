@@ -1,0 +1,52 @@
+#!/bin/bash
+# Submission videos: pick five scenarios by a fixed rule, then render them.
+#   qsub -v SA_MODEL=submission/sa/ppo_sa,MA_MODEL=submission/ma/ppo_ma cluster/video.pbs
+# Of seeds 1..N, the K where the trained flight is clean and the do-nothing
+# policy is worst (solution/pick_video_seeds.py). Each track gets the plain
+# GIF and a captioned side-by-side reel against the do-nothing policy.
+# Output: results/video_<jobid>/
+#PBS -N atc-video
+#PBS -l walltime=04:00:00
+#PBS -l select=1:ncpus=20
+
+CONDA_ROOT=${CONDA_ROOT:-$HOME/miniconda3}
+CONDA_ENV=${CONDA_ENV:-atcrl}
+SA_MODEL=${SA_MODEL:?set SA_MODEL}
+MA_MODEL=${MA_MODEL:?set MA_MODEL}
+N=${N:-40}
+K=${K:-5}
+
+set -u
+JOB=$(echo "$PBS_JOBID" | cut -f1 -d.)
+OUT=$PBS_O_WORKDIR/results/video_$JOB
+mkdir -p "$OUT"
+WORK=$HOME/scratch/video_$JOB
+mkdir -p "$WORK"
+cp -R "$PBS_O_WORKDIR/bluesky-gym" "$WORK"/ || exit 1
+cd "$WORK/bluesky-gym" || exit 1
+
+PY=$CONDA_ROOT/envs/$CONDA_ENV/bin/python
+NCPUS=${NCPUS:-$(nproc)}
+export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 SDL_VIDEODRIVER=dummy
+export PYTHONPATH=$WORK/bluesky-gym:${PYTHONPATH:-}
+export LD_LIBRARY_PATH=$CONDA_ROOT/envs/$CONDA_ENV/lib:${LD_LIBRARY_PATH:-}
+
+{
+for TRACK in sa ma; do
+    MODEL=$PBS_O_WORKDIR/$SA_MODEL
+    [ "$TRACK" = "ma" ] && MODEL=$PBS_O_WORKDIR/$MA_MODEL
+    $PY -m solution.pick_video_seeds --env $TRACK --model "$MODEL" --n "$N" --k "$K" \
+        --workers $(( NCPUS - 1 )) --out "$OUT/seeds_$TRACK.json"
+    SEEDS=$($PY -c "import json, sys; print(*json.load(open(sys.argv[1]))['chosen'])" "$OUT/seeds_$TRACK.json")
+    # shellcheck disable=SC2086
+    $PY -m solution.record --env $TRACK --model "$MODEL" --seeds $SEEDS \
+        --out "$OUT/reel_$TRACK.gif" &
+    # shellcheck disable=SC2086
+    $PY -m solution.record --env $TRACK --model "$MODEL" --seeds $SEEDS --render-size 640 \
+        --caption --compare-neutral --size 900 --max-frames 500 \
+        --out "$OUT/reel_${TRACK}_vs_neutral.gif" &
+done
+wait
+} 2>&1 | grep -v -E "RTree|Reading config|navigation database|Reading cache|Successfully loaded|BADA" \
+       | tee "$OUT/log.txt"
+rm -rf "$WORK"

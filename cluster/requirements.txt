@@ -1,0 +1,5 @@
+gymnasium>=1.0
+stable-baselines3>=2.4
+pettingzoo>=1.26.1
+supersuit>=3.11.0
+bluesky-simulator>=1.0.7

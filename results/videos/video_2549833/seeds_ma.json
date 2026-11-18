@@ -1,0 +1,216 @@
+{
+ "env": "ma",
+ "model": "/lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2539972/ppo_ma",
+ "n": 40,
+ "k": 5,
+ "chosen": [
+  2,
+  33,
+  19,
+  13,
+  40
+ ],
+ "trained_clean": 24,
+ "table": {
+  "1": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 728.0
+  },
+  "2": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 4356.0
+  },
+  "3": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1122.0
+  },
+  "4": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 2203.0
+  },
+  "5": {
+   "trained_unsafe": 104.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1551.0
+  },
+  "6": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1646.0
+  },
+  "7": {
+   "trained_unsafe": 4.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1530.0
+  },
+  "8": {
+   "trained_unsafe": 50.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2013.0
+  },
+  "9": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 2729.0
+  },
+  "10": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 942.0
+  },
+  "11": {
+   "trained_unsafe": 24.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1745.0
+  },
+  "12": {
+   "trained_unsafe": 414.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1529.0
+  },
+  "13": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 3097.0
+  },
+  "14": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1743.0
+  },
+  "15": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1983.0
+  },
+  "16": {
+   "trained_unsafe": 8.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1273.0
+  },
+  "17": {
+   "trained_unsafe": 70.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1635.0
+  },
+  "18": {
+   "trained_unsafe": 340.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2744.0
+  },
+  "19": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 3354.0
+  },
+  "20": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1265.0
+  },
+  "21": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 2937.0
+  },
+  "22": {
+   "trained_unsafe": 31.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2366.0
+  },
+  "23": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1780.0
+  },
+  "24": {
+   "trained_unsafe": 160.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1787.0
+  },
+  "25": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 2504.0
+  },
+  "26": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1806.0
+  },
+  "27": {
+   "trained_unsafe": 249.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2996.0
+  },
+  "28": {
+   "trained_unsafe": 26.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2615.0
+  },
+  "29": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 769.0
+  },
+  "30": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1107.0
+  },
+  "31": {
+   "trained_unsafe": 128.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2020.0
+  },
+  "32": {
+   "trained_unsafe": 81.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1406.0
+  },
+  "33": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 3474.0
+  },
+  "34": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1372.0
+  },
+  "35": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 1086.0
+  },
+  "36": {
+   "trained_unsafe": 106.0,
+   "trained_clean": false,
+   "neutral_unsafe": 1479.0
+  },
+  "37": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 838.0
+  },
+  "38": {
+   "trained_unsafe": 15.0,
+   "trained_clean": false,
+   "neutral_unsafe": 2064.0
+  },
+  "39": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 927.0
+  },
+  "40": {
+   "trained_unsafe": 0.0,
+   "trained_clean": true,
+   "neutral_unsafe": 2990.0
+  }
+ }
+}

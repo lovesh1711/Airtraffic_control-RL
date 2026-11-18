@@ -1,0 +1,50 @@
+============================================================
+OFFICIAL 1000-EPISODE PROTOCOL (seed 42)
+============================================================
+Job ID:    2545470.hn1
+Node:      cn007
+SA model:  results/sa_2539973/ppo_sa
+MA model:  results/ma_2539972/ppo_ma
+Videos:    0  (seeds: 1 2 3 4 5)
+Started:   Fri Oct 30 07:47:19 IST 2026
+============================================================
+
+=================== SINGLE-AGENT (official) ===================
+### Single-agent — mean over 1000 episodes (seed 42)
+| Metric | Mean | Std |
+| --- | ---: | ---: |
+| Goal completion rate [%] | 100.000 | 0.000 |
+| Flight time [s] | 1152.998 | 379.086 |
+| Intrusion events | 0.257 | 0.550 |
+| Intrusion time [s] | 12.374 | 30.664 |
+| Restricted-area events | 0.035 | 0.223 |
+| Restricted-area time [s] | 1.821 | 15.625 |
+| Sector-exit events | 0.002 | 0.045 |
+| Time outside sector [s] | 0.115 | 2.569 |
+_total_reward (own reward, not comparable across teams): -83.958 ± 86.834_
+
+=================== MULTI-AGENT (official) ====================
+### Multi-agent — mean over 10000 agent-episodes (seed 42)
+| Metric | Mean | Std |
+| --- | ---: | ---: |
+| Goal completion rate [%] | 100.000 | 0.000 |
+| Flight time [s] | 1065.572 | 409.115 |
+| Intrusion events | 0.061 | 0.277 |
+| Intrusion time [s] | 2.904 | 14.825 |
+| Restricted-area events | 0.042 | 0.233 |
+| Restricted-area time [s] | 2.074 | 17.536 |
+| Sector-exit events | 0.001 | 0.051 |
+| Time outside sector [s] | 0.046 | 2.073 |
+_total_reward (own reward, not comparable across teams): -29.645 ± 72.910_
+
+Artifacts in /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/official_2545470:
+total 241
+drwxr-xr-x  2 ae24d401 phd  33280 Oct 30 13:07 .
+drwxr-xr-x 49 ae24d401 phd  41472 Oct 30 07:46 ..
+-rw-r--r--  1 ae24d401 phd 514414 Oct 30 13:07 official_ma.csv
+-rw-r--r--  1 ae24d401 phd   1660 Oct 30 13:07 official_ma.txt
+-rw-r--r--  1 ae24d401 phd  51244 Oct 30 08:49 official_sa.csv
+-rw-r--r--  1 ae24d401 phd   1656 Oct 30 08:49 official_sa.txt
+-rw-r--r--  1 ae24d401 phd    411 Oct 30 13:07 summary.txt
+
+Finished: Fri Oct 30 13:07:15 IST 2026

@@ -1,0 +1,12 @@
+300 episodes, identical across models (ma, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+ma_2531101            9.00   5.10   3.81  0.09  1067.8  1.000   87.2    0                  0.731
+ma_2535702            9.46   6.02   3.21  0.22  1037.8  1.000   86.1    0  +0.45 +- 0.74   0.269
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Thu Oct 29 07:55:20 IST 2026

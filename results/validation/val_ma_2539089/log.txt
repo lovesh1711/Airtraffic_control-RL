@@ -1,0 +1,101 @@
+============================================================
+VALIDATION (ma, eval seed 7777, 300 episodes)
+============================================================
+Job ID:   2539089.hn1
+Node:     cn008   cores: 20
+Models:   ma_2531101:ma_2535702
+Started:  Thu Oct 29 07:37:19 IST 2026
+============================================================
+validating 2 MA models x 300 episodes, eval seed 7777, 19 workers
+  ma_2531101         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip
+  ma_2535702         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2535702/ppo_ma.zip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+ /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5/58 shards, 479 s
+  10/58 shards, 496 s
+  15/58 shards, 508 s
+  20/58 shards, 666 s
+  25/58 shards, 706 s
+  30/58 shards, 715 s
+  35/58 shards, 744 s
+  40/58 shards, 886 s
+  45/58 shards, 913 s
+  50/58 shards, 927 s
+  55/58 shards, 972 s
+  58/58 shards, 1067 s
+done in 1067 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_ma_2539089/val.json
+
+300 episodes, identical across models (ma, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+ma_2531101            9.00   5.10   3.81  0.09  1067.8  1.000   87.2    0                  0.731
+ma_2535702            9.46   6.02   3.21  0.22  1037.8  1.000   86.1    0  +0.45 +- 0.74   0.269
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Thu Oct 29 07:55:20 IST 2026

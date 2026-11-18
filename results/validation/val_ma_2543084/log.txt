@@ -1,0 +1,103 @@
+============================================================
+VALIDATION (ma, eval seed 7777, 300 episodes)
+============================================================
+Job ID:   2543084.hn1
+Node:     cn189   cores: 20
+Models:   ma_2539972
+Started:  Fri Oct 30 00:12:42 IST 2026
+============================================================
+validating 1 MA models x 300 episodes, eval seed 7777, 19 workers
+  ma_2539972         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2539972/ppo_ma.zip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+ /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5/57 shards, 537 s
+  10/57 shards, 549 s
+  15/57 shards, 555 s
+  20/57 shards, 622 s
+  25/57 shards, 660 s
+  30/57 shards, 674 s
+  35/57 shards, 682 s
+  40/57 shards, 757 s
+  45/57 shards, 783 s
+  50/57 shards, 791 s
+  55/57 shards, 809 s
+  57/57 shards, 815 s
+done in 815 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_ma_2543084/val.json
+
+300 episodes, identical across models (ma, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+ma_2539972            8.04   4.07   3.90  0.07  1106.1  1.000   89.9    0                  1.000
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Fri Oct 30 00:26:38 IST 2026

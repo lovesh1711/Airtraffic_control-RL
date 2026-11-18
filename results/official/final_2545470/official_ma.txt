@@ -1,0 +1,31 @@
+<frozen importlib._bootstrap>:488: RuntimeWarning: Your system is avx2 capable but pygame was not built with support for it. The performance of some of your blits could be adversely affected. Consider enabling compile time detection with environment variables like PYGAME_DETECT_AVX2=1 if you are compiling without cross compilation.
+obstacle geometry: exact
+action anchor: visibility, heading scan: off, intent: on, speed: anchored, route obs: on, turn guard: 135.0, probe: on, shared intent: on
+Reading config from /lfs/usrhome/phd/ae24d401/bluesky/settings.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Reading cache: /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded plugin AREA
+Successfully loaded plugin DATAFEED
+
+### Multi-agent — mean over 10000 agent-episodes (seed 42)
+
+| Metric | Mean | Std |
+| --- | ---: | ---: |
+| Goal completion rate [%] | 100.000 | 0.000 |
+| Flight time [s] | 1065.572 | 409.115 |
+| Intrusion events | 0.061 | 0.277 |
+| Intrusion time [s] | 2.904 | 14.825 |
+| Restricted-area events | 0.042 | 0.233 |
+| Restricted-area time [s] | 2.074 | 17.536 |
+| Sector-exit events | 0.001 | 0.051 |
+| Time outside sector [s] | 0.046 | 2.073 |
+
+_total_reward (own reward, not comparable across teams): -29.645 ± 72.910_
+
+wrote per-episode metrics to /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/official_2545470/official_ma.csv

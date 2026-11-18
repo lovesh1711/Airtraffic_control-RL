@@ -1,0 +1,114 @@
+============================================================
+VALIDATION (ma, eval seed 7777, 300 episodes)
+============================================================
+Job ID:   2540132.hn1
+Node:     cn213   cores: 20
+Models:   off2=ma_2531101+route_lateral_offset_nm=2:off4=ma_2531101+route_lateral_offset_nm=4:off5=ma_2531101+route_lateral_offset_nm=5
+Started:  Thu Oct 29 11:20:45 IST 2026
+============================================================
+validating 3 MA models x 300 episodes, eval seed 7777, 19 workers
+  off2               /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip  overrides {'route_lateral_offset_nm': 2}
+  off4               /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip  overrides {'route_lateral_offset_nm': 4}
+  off5               /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip  overrides {'route_lateral_offset_nm': 5}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+ /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5/57 shards, 375 s
+  10/57 shards, 388 s
+  15/57 shards, 400 s
+  20/57 shards, 684 s
+  25/57 shards, 719 s
+  30/57 shards, 738 s
+  35/57 shards, 748 s
+  40/57 shards, 1040 s
+  45/57 shards, 1063 s
+  50/57 shards, 1086 s
+  55/57 shards, 1099 s
+  57/57 shards, 1106 s
+done in 1106 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_ma_2540132/val.json
+
+300 episodes, identical across models (ma, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+off5                  7.43   3.87   3.49  0.07  1116.6  1.000   89.3    0                  0.587
+off2                  7.58   3.74   3.75  0.09  1105.2  1.000   89.3    0  +0.15 +- 0.47   0.335
+off4                  7.93   3.92   3.93  0.09  1112.0  1.000   88.4    0  +0.50 +- 0.53   0.078
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Thu Oct 29 11:39:15 IST 2026

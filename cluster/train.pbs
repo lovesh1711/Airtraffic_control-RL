@@ -1,0 +1,91 @@
+#!/bin/bash
+# Training job. Submit from the repository root, e.g.
+#   qsub -l select=1:ncpus=20 -l walltime=20:00:00 -v TRACK=sa,STAGE=1,SEED=170 cluster/train.pbs
+# The flags below are the recipe of the submitted models; README.md lists the
+# exact sequence of jobs. Output: results/<track>_<jobid>/
+#
+#   TRACK      sa | ma
+#   STAGE      1 = fresh run, 2 = continuation (fallback routing, higher
+#              restricted/exit charges, gentler MA updates)
+#   TIMESTEPS  env steps for this job
+#   SEED       first worker seed (workers use SEED .. SEED+n-1; never 42)
+#   RESUME     model .zip to continue from (stage 2)
+#   LR, LR_FINAL               learning rate, linearly to LR_FINAL
+#   HARD_TRAFFIC_PROB          SA: share of conflict-timed training scenarios
+#   ROUTE_LATERAL_OFFSET_NM    MA: route lateral offset
+#PBS -N atc-train
+#PBS -l walltime=20:00:00
+#PBS -l select=1:ncpus=40
+
+CONDA_ROOT=${CONDA_ROOT:-$HOME/miniconda3}
+CONDA_ENV=${CONDA_ENV:-atcrl}
+TRACK=${TRACK:-sa}
+STAGE=${STAGE:-1}
+TIMESTEPS=${TIMESTEPS:-15000000}
+SEED=${SEED:-100}
+RESUME=${RESUME:-}
+LR=${LR:-}
+LR_FINAL=${LR_FINAL:-}
+HARD_TRAFFIC_PROB=${HARD_TRAFFIC_PROB:-}
+ROUTE_LATERAL_OFFSET_NM=${ROUTE_LATERAL_OFFSET_NM:-}
+
+set -u
+case "$RESUME" in
+    ""|/*) ;;
+    *) RESUME=$PBS_O_WORKDIR/$RESUME ;;
+esac
+JOB=$(echo "$PBS_JOBID" | cut -f1 -d.)
+OUT=$PBS_O_WORKDIR/results/${TRACK}_${JOB}
+mkdir -p "$OUT"
+
+# run from a scratch copy so later edits to the source don't affect the job
+WORK=$HOME/scratch/train_$JOB
+mkdir -p "$WORK"
+cp -R "$PBS_O_WORKDIR/bluesky-gym" "$WORK"/ || exit 1
+cd "$WORK/bluesky-gym" || exit 1
+
+PY=$CONDA_ROOT/envs/$CONDA_ENV/bin/python
+NCPUS=${NCPUS:-$(qstat -f "$PBS_JOBID" 2>/dev/null | awk -F' = ' '/Resource_List.ncpus/ {print $2; exit}')}
+NCPUS=${NCPUS:-$(nproc)}
+NWORK=$(( NCPUS - 1 ))
+export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 SDL_VIDEODRIVER=dummy
+export PYTHONPATH=$WORK/bluesky-gym:${PYTHONPATH:-}
+export LD_LIBRARY_PATH=$CONDA_ROOT/envs/$CONDA_ENV/lib:${LD_LIBRARY_PATH:-}
+
+ARGS="--timesteps $TIMESTEPS --seed $SEED --out $OUT/ppo_$TRACK --batch-size 512
+      --checkpoint-freq 1000000 --route-mode visibility --intent --route-obs --probe
+      --speed-mode anchored --turn-guard-deg 135 --separation-mode plan --replay-prob 0.3
+      --w-obstacle -0.85 --w-miss -100 --w-sep-barrier -1 --w-intrusion-event -50"
+if [ "$STAGE" = "1" ]; then
+    ARGS="$ARGS --w-restricted-event -50 --w-exit-event -50"
+else
+    ARGS="$ARGS --w-restricted-event -150 --w-exit-event -150 --route-least-penetration"
+fi
+[ -n "$RESUME" ] && ARGS="$ARGS --resume $RESUME"
+[ -n "$LR" ] && ARGS="$ARGS --lr $LR"
+[ -n "$LR_FINAL" ] && ARGS="$ARGS --lr-final $LR_FINAL"
+
+if [ "$TRACK" = "sa" ]; then
+    ARGS="$ARGS --n-envs $NWORK --rollout-size 19968 --w-boundary -1.5 --max-std 1.0"
+    [ -z "$RESUME" ] && ARGS="$ARGS --bounded-mean"
+    [ "$STAGE" != "1" ] && ARGS="$ARGS --route-budget-hard-frac 0.95"
+    [ -n "$HARD_TRAFFIC_PROB" ] && ARGS="$ARGS --hard-traffic-prob $HARD_TRAFFIC_PROB"
+    MODULE=solution.train_sa
+else
+    ARGS="$ARGS --n-procs $NWORK --rollout-size 199680 --share-intent"
+    [ "$STAGE" != "1" ] && ARGS="$ARGS --route-budget-hard-frac 0.85 --n-epochs 4 --target-kl 0.02"
+    [ -n "$ROUTE_LATERAL_OFFSET_NM" ] && ARGS="$ARGS --route-lateral-offset-nm $ROUTE_LATERAL_OFFSET_NM"
+    MODULE=solution.train_ma
+fi
+
+{
+    echo "job $PBS_JOBID on $(hostname), $NCPUS cores, started $(date)"
+    echo "$PY -m $MODULE $ARGS"
+    $PY -c "import bluesky as bs; bs.init(mode='sim', detached=True)" > /dev/null
+    # shellcheck disable=SC2086
+    $PY -m $MODULE $ARGS
+    echo "finished $(date)"
+} 2>&1 | grep -v -E "RTree|Reading config|navigation database|Reading cache|Successfully loaded|BADA" \
+       | tee "$OUT/train.log"
+
+rm -rf "$WORK"

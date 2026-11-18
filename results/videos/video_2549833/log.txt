@@ -1,0 +1,102 @@
+============================================================
+VIDEOS   job 2549833.hn1   node cn035   cores 20
+SA model: results/sa_2539973/ppo_sa
+MA model: results/ma_2539972/ppo_ma
+Rule:     of seeds 1..40, the 5 where the trained flight is clean and neutral is worst
+Started:  Sat Oct 31 00:13:12 IST 2026
+============================================================
+sa: /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/sa_2539973/ppo_sa
+seed trained unsafe s  clean neutral unsafe s
+   1                0    yes               34
+   2                0    yes              426   <- chosen
+   3                0    yes               10
+   4                0    yes              184
+   5               40     no              144
+   6                0    yes              105
+   7                6     no               58
+   8                0    yes              508   <- chosen
+   9                0    yes              528   <- chosen
+  10               45     no              155
+  11               17     no              616
+  12                0    yes               61
+  13                0    yes              462   <- chosen
+  14                0    yes              138
+  15                0    yes              262
+  16                0    yes              155
+  17                5     no               61
+  18               93     no              365
+  19               21     no              245
+  20                0    yes                0
+  21                0    yes              271
+  22              237     no              283
+  23                0    yes              150
+  24                0    yes              319
+  25               22     no              153
+  26                0    yes               63
+  27                0    yes              327
+  28                0    yes              306
+  29               55     no               70
+  30                0    yes              127
+  31              119     no              300
+  32                0    yes              164
+  33                0    yes              344   <- chosen
+  34                0    yes              301
+  35                0    yes              126
+  36                0    yes              101
+  37                0    yes               59
+  38                0    yes                0
+  39                0    yes              297
+  40               29     no              550
+rule: of seeds 1..40, the 5 where the trained policy is clean and the neutral policy is worst. Trained clean in 28/40. Chosen: 9 8 13 2 33
+
+ma: /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2539972/ppo_ma
+seed trained unsafe s  clean neutral unsafe s
+   1                0    yes              728
+   2                0    yes             4356   <- chosen
+   3                0    yes             1122
+   4                0    yes             2203
+   5              104     no             1551
+   6                0    yes             1646
+   7                4     no             1530
+   8               50     no             2013
+   9                0    yes             2729
+  10                0    yes              942
+  11               24     no             1745
+  12              414     no             1529
+  13                0    yes             3097   <- chosen
+  14                0    yes             1743
+  15                0    yes             1983
+  16                8     no             1273
+  17               70     no             1635
+  18              340     no             2744
+  19                0    yes             3354   <- chosen
+  20                0    yes             1265
+  21                0    yes             2937
+  22               31     no             2366
+  23                0    yes             1780
+  24              160     no             1787
+  25                0    yes             2504
+  26                0    yes             1806
+  27              249     no             2996
+  28               26     no             2615
+  29                0    yes              769
+  30                0    yes             1107
+  31              128     no             2020
+  32               81     no             1406
+  33                0    yes             3474   <- chosen
+  34                0    yes             1372
+  35                0    yes             1086
+  36              106     no             1479
+  37                0    yes              838
+  38               15     no             2064
+  39                0    yes              927
+  40                0    yes             2990   <- chosen
+rule: of seeds 1..40, the 5 where the trained policy is clean and the neutral policy is worst. Trained clean in 24/40. Chosen: 2 33 19 13 40
+
+chosen seeds: SA 9 8 13 2 33 | MA 2 33 19 13 40
+
+wrote /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/video_2549833/reel_ma.gif  (350 frames)
+wrote /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/video_2549833/reel_ma_vs_neutral.gif  (370 frames, 900x491, 8.6 MB)
+wrote /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/video_2549833/reel_sa.gif  (390 frames)
+wrote /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/video_2549833/reel_sa_vs_neutral.gif  (420 frames, 900x491, 16.6 MB)
+Finished: Sat Oct 31 00:28:46 IST 2026

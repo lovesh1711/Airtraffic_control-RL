@@ -1,0 +1,95 @@
+============================================================
+VALIDATION (ma, eval seed 7777, 300 episodes)
+============================================================
+Job ID:   2539970.hn1
+Node:     cn210   cores: 20
+Models:   ma_2531101:off3=ma_2531101+route_lateral_offset_nm=3:af5=ma_2531101+action_frequency=5
+Started:  Thu Oct 29 10:27:27 IST 2026
+============================================================
+validating 3 MA models x 300 episodes, eval seed 7777, 19 workers
+  ma_2531101         /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip
+  off3               /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip  overrides {'route_lateral_offset_nm': 3}
+  af5                /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/ma_2531101/ppo_ma.zip  overrides {'action_frequency': 5}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+/lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5/57 shards, 376 s
+  10/57 shards, 384 s
+  15/57 shards, 395 s
+  20/57 shards, 685 s
+  25/57 shards, 705 s
+  30/57 shards, 738 s
+  35/57 shards, 747 s
+  40/57 shards, 1236 s
+  45/57 shards, 1278 s
+  50/57 shards, 1306 s
+  55/57 shards, 1315 s
+  57/57 shards, 1331 s
+done in 1331 s -> /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/val_ma_2539970/val.json
+
+300 episodes, identical across models (ma, eval seed 7777)
+
+model                 ALL3   intr  restr   out  flight   goal clean% miss        vs best P(best)
+off3                  8.01   4.37   3.56  0.07  1114.0  1.000   89.6    0                  0.747
+af5                   8.77   5.15   3.59  0.04  1065.6  1.000   87.3    0  +0.77 +- 1.02   0.189
+ma_2531101            9.00   5.10   3.81  0.09  1067.8  1.000   87.2    0  +0.99 +- 0.98   0.064
+
+Ranked by ALL3 (violation seconds). clean% = flights with goal reached and no
+intrusion, restricted entry or sector exit (MA: per aircraft).
+vs best = paired difference over the same episodes, +- its standard error.
+Pick the best; anything within ~2 SE of it is a statistical tie.
+
+Finished: Thu Oct 29 10:49:39 IST 2026

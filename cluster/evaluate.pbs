@@ -1,0 +1,63 @@
+#!/bin/bash
+# Official evaluation: seed 42, 1000 episodes, both tracks side by side.
+# Submit from the repository root:
+#   qsub -v SA_MODEL=submission/sa/ppo_sa,MA_MODEL=submission/ma/ppo_ma cluster/evaluate.pbs
+# A model path is given without .zip; "neutral" evaluates the do-nothing
+# policy and "skip" leaves that track out. The multi-agent track takes ~6 h.
+# Output: results/official_<jobid>/
+#PBS -N atc-official
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=4
+
+CONDA_ROOT=${CONDA_ROOT:-$HOME/miniconda3}
+CONDA_ENV=${CONDA_ENV:-atcrl}
+SA_MODEL=${SA_MODEL:?set SA_MODEL}
+MA_MODEL=${MA_MODEL:?set MA_MODEL}
+EPISODES=${EPISODES:-1000}
+
+set -u
+JOB=$(echo "$PBS_JOBID" | cut -f1 -d.)
+OUT=$PBS_O_WORKDIR/results/official_$JOB
+mkdir -p "$OUT"
+WORK=$HOME/scratch/official_$JOB
+mkdir -p "$WORK"
+cp -R "$PBS_O_WORKDIR/bluesky-gym" "$WORK"/ || exit 1
+cd "$WORK/bluesky-gym" || exit 1
+
+PY=$CONDA_ROOT/envs/$CONDA_ENV/bin/python
+export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 SDL_VIDEODRIVER=dummy
+export PYTHONPATH=$WORK/bluesky-gym:${PYTHONPATH:-}
+export LD_LIBRARY_PATH=$CONDA_ROOT/envs/$CONDA_ENV/lib:${LD_LIBRARY_PATH:-}
+
+for MODEL in "$SA_MODEL" "$MA_MODEL"; do
+    case "$MODEL" in
+        neutral|skip) ;;
+        *) [ -f "$PBS_O_WORKDIR/$MODEL.zip" ] || { echo "no model at $MODEL.zip"; exit 1; } ;;
+    esac
+done
+model_arg() {
+    [ "$1" = "neutral" ] || echo "--model $PBS_O_WORKDIR/$1"
+}
+
+echo "official protocol (seed 42, $EPISODES episodes), job $PBS_JOBID, $(date)" | tee "$OUT/summary.txt"
+echo "SA: $SA_MODEL   MA: $MA_MODEL" | tee -a "$OUT/summary.txt"
+PIDS=""
+for TRACK in sa ma; do
+    MODEL=$SA_MODEL
+    [ "$TRACK" = "ma" ] && MODEL=$MA_MODEL
+    [ "$MODEL" = "skip" ] && continue
+    # shellcheck disable=SC2046
+    $PY -m solution.evaluate --env $TRACK --episodes "$EPISODES" $(model_arg "$MODEL") \
+        --out "$OUT/official_$TRACK.csv" > "$OUT/official_$TRACK.txt" 2>&1 &
+    PIDS="$PIDS $!"
+done
+# shellcheck disable=SC2086
+wait $PIDS
+
+for TRACK in sa ma; do
+    [ -f "$OUT/official_$TRACK.txt" ] || continue
+    echo "" | tee -a "$OUT/summary.txt"
+    grep -E "^\||^###|^_" "$OUT/official_$TRACK.txt" | tee -a "$OUT/summary.txt"
+done
+echo "finished $(date)" | tee -a "$OUT/summary.txt"
+rm -rf "$WORK"

@@ -1,0 +1,25 @@
+<frozen importlib._bootstrap>:488: RuntimeWarning: Your system is avx2 capable but pygame was not built with support for it. The performance of some of your blits could be adversely affected. Consider enabling compile time detection with environment variables like PYGAME_DETECT_AVX2=1 if you are compiling without cross compilation.
+recording under MDP: {'obstacle_mode': 'exact', 'obstacle_points': 8, 'route_mode': 'visibility', 'scan_headings': 0, 'route_clearance_nm': 2.5, 'route_budget_frac': 0.8, 'route_max_replans': 0, 'route_budget_hard_frac': 0.85, 'route_least_penetration': True, 'route_lateral_offset_nm': 3.0, 'intent': True, 'speed_mode': 'anchored', 'speed_min_kt': 200.0, 'turn_guard_deg': 135.0, 'route_obs': True, 'probe': True, 'share_intent': True, 'action_frequency': 10}
+Reading config from /lfs/usrhome/phd/ae24d401/bluesky/settings.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Reading cache: /lfs/usrhome/phd/ae24d401/bluesky/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded plugin AREA
+Successfully loaded plugin DATAFEED
+ERROR: Couldn't open /dev/input/event0: Permission denied
+ERROR: Couldn't open /dev/input/event0: Permission denied
+  recorded seed 2 (187 frames so far)
+Simulation node b'\x00E\x83<\xfd' quitting.
+  recorded seed 33 (378 frames so far)
+Simulation node b'\x00E\x83<\xfd' quitting.
+  recorded seed 19 (625 frames so far)
+Simulation node b'\x00E\x83<\xfd' quitting.
+  recorded seed 13 (808 frames so far)
+Simulation node b'\x00E\x83<\xfd' quitting.
+  recorded seed 40 (1048 frames so far)
+wrote /lfs/usrhome/phd/ae24d401/lovesh/parallelized_env/results/video_2549833/reel_ma.gif  (350 frames)
