@@ -7,8 +7,8 @@ Run from bluesky-gym/:
 
 Both regenerate the validation scenarios (eval seed 7777) without the simulator
 and replay every aircraft's PLANNED route at constant speed (150 m/s, removed at
-the 5 km capture radius). That is a proxy -- the policy deviates from its route
-and changes speed -- but it shows where the planner puts aircraft together.
+the 5 km capture radius). It's only a proxy, since the policy deviates from its route
+and changes speed, but it shows where the planner puts aircraft together.
 
 ``diagnose`` matches each pair of MA aircraft that lost separation in a
 validation run (two aircraft of one episode with the same intrusion seconds) to

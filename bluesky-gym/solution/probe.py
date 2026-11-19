@@ -140,7 +140,7 @@ class ManoeuvreProbeObservation:
             k = _first(cap[:, 1:], n)                       # capture at step k + 1
             alive = np.arange(n + 1)[None, :] <= (k + 1)[:, None]
 
-        # --- traffic -------------------------------------------------------
+        # traffic
         tl, tn = traffic
         if tl.size:
             la, lo = lat[:, 1:, None], lon[:, 1:, None]
@@ -155,7 +155,7 @@ class ManoeuvreProbeObservation:
             t_los = np.full(self.n, n)
             los_s = np.zeros(self.n)
 
-        # --- geometry: the metric's own containment test on lat/lon ---------
+        # obstacles and sector, with the same containment test the metrics use
         g = slice(0, n + 1, self.geo_every)
         pts = np.column_stack((lat[:, g].ravel(), lon[:, g].ravel()))
         shape = lat[:, g].shape
@@ -204,7 +204,7 @@ class ManoeuvreProbeMixin:
                              "speed candidates are the targets a1 selects")
         self._future_key, self._futures = None, {}
 
-    # -- futures ------------------------------------------------------------
+    # predicted futures
     def _controlled(self):
         return getattr(self, "possible_agents", None) or [self.agent]
 
@@ -257,7 +257,7 @@ class ManoeuvreProbeMixin:
         f = [self._future(a, n) for a in others]
         return (np.column_stack([x[0] for x in f]), np.column_stack([x[1] for x in f]))
 
-    # -- the probe ------------------------------------------------------------
+    # the probe
     def _probe_observe(self, ac_id):
         p = self.probe_obs
         i = bs.traf.id2idx(ac_id)
@@ -275,7 +275,7 @@ class ManoeuvreProbeMixin:
                          self._obstacle_polygons(), self._sector_vertices(),
                          goal=self._goal_latlon(ac_id), capture_nm=self._capture_nm())
 
-    # -- shared intent (multi-agent) --------------------------------------------
+    # shared intent (multi-agent)
     SHARE_HORIZON = 300
 
     def _intent_row(self, own, other):

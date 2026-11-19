@@ -258,7 +258,7 @@ def main():
     if not (args.kind and args.episodes and args.out and args.models):
         p.error("--kind, --episodes, --out and at least one model are required")
     if args.eval_seed == 42:
-        print("WARNING: seed 42 IS the official test stream -- do not select on it")
+        print("WARNING: seed 42 is the official test stream, don't pick models on it")
     models = [resolve(s, args.results) for s in args.models]
     labels = [lab for lab, _, _ in models]
     if len(set(labels)) != len(labels):
